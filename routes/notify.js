@@ -3,18 +3,20 @@ var Gpio = require('pigpio').Gpio;
 var router = express.Router();
 
 var motor = new Gpio(18, {mode: Gpio.OUTPUT});
-var pulseWidth = 1200;
-var increment = 50;
+var pulseWidth = 2000;
+var increment = 500;
 
 setInterval(function () {
     motor.servoWrite(pulseWidth);
 
-    /*pulseWidth += increment;
+    pulseWidth += increment;
     if (pulseWidth >= 2000) {
-        increment = -50;
+        increment = -increment;
     } else if (pulseWidth <= 1000) {
-        increment = 50;
-    }*/
+        increment = -increment;
+    }
+    console.log("increment: " + increment);
+    console.log("PulseWidth: " + pulseWidth);
 }, 10000);
 router.post('/', function(req, res, next) {
   //TODO if some reward condition is hold
