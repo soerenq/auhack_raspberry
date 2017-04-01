@@ -4,7 +4,7 @@ var router = express.Router();
 
 var motor = new Gpio(18, {mode: Gpio.OUTPUT});
 var pulseWidth = 2000;
-var increment = 500;
+var increment = 250;
 
 setInterval(function () {
     motor.servoWrite(pulseWidth);
