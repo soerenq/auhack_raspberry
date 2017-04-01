@@ -10,16 +10,6 @@ var prev = openPos;
 setInterval(function () {
     prev = prev === openPos ? closedPos : openPos;
     motor.servoWrite(prev);
-
-
-//    pulseWidth += increment;
-    /*if (pulseWidth >= 2000) {
-        increment = -100;
-    } else if (pulseWidth <= 1000) {
-        increment = 100;
-    }*/
-    console.log("increment: " + increment);
-    console.log("PulseWidth: " + pulseWidth);
 }, 1000);
 router.post('/', function(req, res, next) {
   //TODO if some reward condition is hold
