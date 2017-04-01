@@ -3,7 +3,7 @@ var Gpio = require('pigpio').Gpio;
 var router = express.Router();
 
 var motor = new Gpio(18, {mode: Gpio.OUTPUT});
-var pulseWidth = 1000;
+var pulseWidth = 2000;
 var increment = 100;
 
 setInterval(function () {
@@ -11,11 +11,11 @@ setInterval(function () {
 
 
     pulseWidth += increment;
-    if (pulseWidth >= 2000) {
+    /*if (pulseWidth >= 2000) {
         increment = -100;
     } else if (pulseWidth <= 1000) {
         increment = 100;
-    }
+    }*/
     console.log("increment: " + increment);
     console.log("PulseWidth: " + pulseWidth);
 }, 1000);
