@@ -93,10 +93,10 @@ function onListening() {
     debug('Listening on ' + bind);
 
     //We should already have created specific service type
-    var serviceId = "56d68980-24f5-4720-adf0-a5e29de42e52";
+    var serviceId = "03a6f8d7-e372-4357-98f9-5e1b79551c56";
 
-    //TODO
-    var userId = "56d68980-24f5-4720-adf0-a5e29de42e60";
+    //Registering for ALICE
+    var userId = "11505f78-62c6-4e79-b8df-3318d8a6fa24";
 
     var data = {
         id: id,
@@ -105,7 +105,7 @@ function onListening() {
         userId: userId};
 
     //TODO change to soerenq.com
-    request('http://localhost:3000/services(' + serviceId + ')/register', {
+    request('http://soerenq.com:9479/services(' + serviceId + ')/register', {
         method: "POST",
         json: true,
         body: data

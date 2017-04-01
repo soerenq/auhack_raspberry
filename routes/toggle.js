@@ -7,15 +7,11 @@ var openPos = 1500;
 var closedPos = 525;
 
 var prev = openPos;
-setInterval(function () {
+router.post('/', function(req, res, next) {
     prev = prev === openPos ? closedPos : openPos;
     motor.servoWrite(prev);
-}, 1000);
-router.post('/', function(req, res, next) {
-  //TODO if some reward condition is hold
 
-
-  res.sendStatus(200);
+    res.sendStatus(200);
 });
 
 module.exports = router;
