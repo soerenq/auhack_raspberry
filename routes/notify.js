@@ -10,7 +10,7 @@ setInterval(function () {
     motor.servoWrite(pulseWidth);
 
     pulseWidth += increment;
-    if (pulseWidth >= 2000) {
+    if (pulseWidth >= 4000) {
         increment = -increment;
     } else if (pulseWidth <= 1000) {
         increment = -increment;
