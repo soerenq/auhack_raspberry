@@ -7,12 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('auhack-raspberry:server');
 var http = require('http');
+var request = require('request');
+
+const uuidV4 = require('uuid/v4');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '1337');
 app.set('port', port);
 
 /**
@@ -21,6 +24,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var id = uuidV4();
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -34,19 +38,19 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -54,27 +58,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
@@ -82,9 +86,34 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on ' + bind);
+
+    //We should already have created specific service type
+    var serviceId = "56d68980-24f5-4720-adf0-a5e29de42e52";
+
+    //TODO
+    var userId = "56d68980-24f5-4720-adf0-a5e29de42e60";
+
+    var data = {
+        id: id,
+        ip: addr.ip,
+        port: addr.port,
+        userId: userId};
+
+    //TODO change to soerenq.com
+    request('http://localhost:3000/services(' + serviceId + ')/register', {
+        method: "POST",
+        json: true,
+        body: data
+    }, function(error, response, body){
+        console.log('error:', error);
+        console.log('statusCode:', response && response.statusCode);
+        console.log('body:', body);
+
+
+    })
 }
