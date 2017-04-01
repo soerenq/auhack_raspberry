@@ -3,11 +3,13 @@ var Gpio = require('pigpio').Gpio;
 var router = express.Router();
 
 var motor = new Gpio(18, {mode: Gpio.OUTPUT});
-var pulseWidth = 500;
-var increment = 500;
+var openPos = 1500;
+var closedPos = 525;
 
+var prev = openPos;
 setInterval(function () {
-    motor.servoWrite(pulseWidth);
+    prev = prev === openPos ? closedPos : openPos;
+    motor.servoWrite(prev);
 
 
 //    pulseWidth += increment;
