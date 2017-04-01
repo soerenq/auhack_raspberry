@@ -15,7 +15,7 @@ setInterval(function () {
     } else if (pulseWidth <= 1000) {
         increment = 50;
     }*/
-}, 1000);
+}, 10000);
 router.post('/', function(req, res, next) {
   //TODO if some reward condition is hold
 
