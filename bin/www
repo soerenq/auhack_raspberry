@@ -9,7 +9,6 @@ var debug = require('debug')('auhack-raspberry:server');
 var http = require('http');
 var request = require('request');
 var ip = require('ip');
-const uuidV4 = require('uuid/v4');
 
 /**
  * Get port from environment and store in Express.
@@ -24,7 +23,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-var id = uuidV4();
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -93,11 +91,10 @@ function onListening() {
     console.log('Listening on ' + bind);
 
     //We should already have created specific service type
-    var serviceId = "03a6f8d7-e372-4357-98f9-5e1b79551c56";
+    var serviceId = "15815c7b-f77b-4162-b5a1-c4c2a6cd824b";
 
     //Registering for ALICE
-    var userId = "11505f78-62c6-4e79-b8df-3318d8a6fa24";
-    console.log("Ip: " + ip.address());
+    var userId = "ece30dcc-f1f2-4afd-9a42-c62ae3c62d45";
     var data = {
         ip: ip.address(),
         port: addr.port,
