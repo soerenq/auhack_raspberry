@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('auhack-raspberry:server');
 var http = require('http');
 var request = require('request');
-
+var ip = require('ip');
 const uuidV4 = require('uuid/v4');
 
 /**
@@ -90,16 +90,16 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    console.log('Listening on ' + bind);
 
     //We should already have created specific service type
     var serviceId = "03a6f8d7-e372-4357-98f9-5e1b79551c56";
 
     //Registering for ALICE
     var userId = "11505f78-62c6-4e79-b8df-3318d8a6fa24";
-    console.log("Ip: " + addr.ip);
+    console.log("Ip: " + ip.address());
     var data = {
-        ip: addr.ip,
+        ip: ip.address(),
         port: addr.port,
         userId: userId};
 
