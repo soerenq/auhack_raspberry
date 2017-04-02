@@ -97,14 +97,12 @@ function onListening() {
 
     //Registering for ALICE
     var userId = "11505f78-62c6-4e79-b8df-3318d8a6fa24";
-
+    console.log("Ip: " + addr.ip);
     var data = {
-        id: id,
         ip: addr.ip,
         port: addr.port,
         userId: userId};
 
-    //TODO change to soerenq.com
     request('http://soerenq.com:9479/services(' + serviceId + ')/register', {
         method: "POST",
         json: true,
